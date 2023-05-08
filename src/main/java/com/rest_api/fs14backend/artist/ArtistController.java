@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("artists")
@@ -13,15 +14,24 @@ public class ArtistController {
     private ArtistService artistService;
 
     @GetMapping("/")
-    public List<Artist> getAllArtists()
+    public HashMap<String,Object> getAllArtists()
     {
-        return artistService.getArtists();
+        HashMap<String,Object> response = new HashMap<String,Object>();
+        List<Artist> artists = artistService.getArtists();
+        response.put("artists",artists);
+        System.out.println(artists.get(0).getName());
+        return response;
+    }
+
+    @GetMapping("{artistId}")
+    public Artist getArtist(@PathVariable UUID artistId) {
+        Artist artist = artistService.findArtist(artistId);
+        return artist;
     }
 
     @PostMapping(value="/",consumes = {"application/json"})
     public HashMap<String,Object> createArtist(@RequestBody Artist newArtist)
     {
-        System.out.println(newArtist.getName());
         Artist createdArtist = artistService.createArtist(newArtist);
         HashMap<String,Object> response = new HashMap<String,Object>();
         response.put("message",String.format("successfull created artist %s",newArtist.getName()));
