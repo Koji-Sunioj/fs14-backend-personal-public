@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
+public
 class OrderQuantityKey implements Serializable {
 
     @Column(name = "order_id")
