@@ -2,6 +2,7 @@ package com.rest_api.fs14backend.album;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rest_api.fs14backend.artist.Artist;
+import com.rest_api.fs14backend.order_bridge.OrderQuantity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +27,9 @@ public class Album {
     @UuidGenerator
     @Column(name="album_id")
     private UUID albumId;
+
+    @OneToMany(mappedBy = "album")
+    Set<OrderQuantity> albums;
 
     @ManyToOne
     @JoinColumn(name="artist_id", nullable=false)

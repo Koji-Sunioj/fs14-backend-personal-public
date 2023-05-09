@@ -24,7 +24,6 @@ public class Artist {
     @Column(name="artist_id")
     private UUID artistId;
 
-    //remove to get joined list
     @JsonIgnore
     @OneToMany(mappedBy="artist")
     private List<Album> albums = new ArrayList<>();
