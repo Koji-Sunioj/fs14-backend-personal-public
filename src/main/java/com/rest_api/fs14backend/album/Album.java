@@ -49,8 +49,4 @@ public class Album {
     public String getArtistName() {
         return this.artist.getName();
     }
-
-    public UUID getArtistId() {
-        return this.artist.getArtistId();
-    }
 }

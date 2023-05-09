@@ -23,8 +23,8 @@ public class AlbumService {
         return albumRepository.findById(albumId).orElse(null);
     }
 
-    public List<Album> getAlbums(){
-        return albumRepository.findAll();
+    public List<AlbumWODTO> getAlbums(){
+        return albumRepository.findBy();
     }
 
 
