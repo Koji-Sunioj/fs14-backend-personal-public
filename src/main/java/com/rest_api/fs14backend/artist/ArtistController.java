@@ -1,4 +1,6 @@
 package com.rest_api.fs14backend.artist;
+import com.rest_api.fs14backend.album.Album;
+import com.rest_api.fs14backend.album.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,9 @@ public class ArtistController {
     @Autowired
     private ArtistService artistService;
 
+    @Autowired
+    private AlbumService albumService;
+
     @GetMapping("/")
     public HashMap<String,Object> getAllArtists()
     {
@@ -24,9 +29,23 @@ public class ArtistController {
     }
 
     @GetMapping("{artistId}")
-    public Artist getArtist(@PathVariable UUID artistId) {
+    public ArtistDTO getArtist(@PathVariable UUID artistId) {
         Artist artist = artistService.findArtist(artistId);
-        return artist;
+        List<Album> albums = albumService.findAlbumsByArtistId(artistId);
+        ArtistDTO withAlbums = new ArtistDTO(artist.getArtistId(),artist.getName(),albums);
+
+
+        System.out.println(albums.get(0).getTitle());
+        /*ArtistDTO artist = artistService.findArtistTest(artistId);*/
+        return withAlbums;
+    }
+
+    @DeleteMapping("{artistId}")
+    public HashMap<String,String> deleteArtist(@PathVariable UUID artistId){
+        artistService.removeArtist(artistId);
+        HashMap<String,String> response = new HashMap<String,String>();
+        response.put("message",String.format("artist %s successfully deleted",artistId));
+        return response;
     }
 
     @PostMapping(value="/",consumes = {"application/json"})

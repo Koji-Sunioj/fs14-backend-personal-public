@@ -14,6 +14,7 @@ import java.util.UUID;
 @Repository
 public interface AlbumRepository extends JpaRepository<Album,UUID> {
     List<AlbumWODTO> findBy();
+    List<Album> findByArtistArtistId(UUID artistID);
 }
 
 

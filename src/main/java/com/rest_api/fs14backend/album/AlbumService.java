@@ -27,13 +27,21 @@ public class AlbumService {
         return albumRepository.findBy();
     }
 
+    public void removeAlbum(UUID albumId)
+    {
+        albumRepository.deleteById(albumId);
+    }
 
+    public List<Album> findAlbumsByArtistId(UUID artistId) {
+        return albumRepository.findByArtistArtistId(artistId);
+    }
 
     public Album createAlbum(AlbumDTO newAlbum)
     {
         Artist existingArtist = artistService.findArtist(newAlbum.artistId());
         Album createdAlbum = new Album();
         createdAlbum.setTitle(newAlbum.title());
+        createdAlbum.setReleased(newAlbum.released());
         createdAlbum.setPrice(newAlbum.price());
         createdAlbum.setDescription(newAlbum.description());
         createdAlbum.setStock(newAlbum.stock());

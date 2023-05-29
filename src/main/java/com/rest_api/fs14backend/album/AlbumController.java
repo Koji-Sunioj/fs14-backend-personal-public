@@ -44,4 +44,13 @@ public class AlbumController {
         return response;
     }
 
+    @DeleteMapping("{albumId}")
+    public HashMap<String,String> deleteAlbum(@PathVariable UUID albumId)
+    {
+        albumService.removeAlbum(albumId);
+        HashMap<String,String> response = new HashMap<String,String>();
+        response.put("message",String.format("album %s successfully deleted",albumId));
+        return response;
+    }
+
 }

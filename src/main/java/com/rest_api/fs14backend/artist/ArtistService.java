@@ -15,11 +15,16 @@ public class ArtistService {
         return artistRepository.findAll();
     }
 
+    public void removeArtist(UUID artistId) { artistRepository.deleteById(artistId);}
 
     public Artist findArtist(UUID artistId)
     {
         return artistRepository.findById(artistId).orElse(null);
     }
+
+    public ArtistDTO findArtistTest(UUID artistId) {
+        return artistRepository.findByArtistId(artistId);
+    };
 
     public Artist createArtist(Artist newArtist)
     {

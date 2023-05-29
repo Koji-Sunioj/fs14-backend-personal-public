@@ -7,4 +7,6 @@ import java.util.UUID;
 
 @Repository
 public interface ArtistRepository  extends JpaRepository<Artist, UUID> {
+
+    ArtistDTO findByArtistId(UUID artistId);
 }

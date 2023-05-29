@@ -28,8 +28,8 @@ public class Album {
     @Column(name="album_id")
     private UUID albumId;
 
-    @OneToMany(mappedBy = "album")
-    Set<OrderQuantity> albums;
+    /*@OneToMany(mappedBy = "album")
+    Set<OrderQuantity> albums;*/
 
     @ManyToOne
     @JoinColumn(name="artist_id", nullable=false)
@@ -47,6 +47,9 @@ public class Album {
 
     @Column(name="stock")
     private Integer stock;
+
+    @Column(name="released")
+    private Integer released;
 
     @Column(name="tags",length=50)
     private String[] tags;
