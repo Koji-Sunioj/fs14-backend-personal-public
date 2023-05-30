@@ -1,9 +1,7 @@
 package com.rest_api.fs14backend.order;
 
 import com.rest_api.fs14backend.album.AlbumRepository;
-import com.rest_api.fs14backend.artist.ArtistService;
-import com.rest_api.fs14backend.order.Order;
-import com.rest_api.fs14backend.order.OrderRepository;
+import com.rest_api.fs14backend.order.dto.OrderDTO;
 import com.rest_api.fs14backend.order_bridge.OrderQuantity;
 import com.rest_api.fs14backend.order_bridge.OrderQuantityKey;
 import com.rest_api.fs14backend.order_bridge.OrderQuantityRepository;

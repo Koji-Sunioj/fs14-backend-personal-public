@@ -1,7 +1,7 @@
 package com.rest_api.fs14backend.order;
 
 
-import com.rest_api.fs14backend.order.OrderService;
+import com.rest_api.fs14backend.order.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping(value="/",consumes = {"application/json"})
-    public HashMap<String,Object> createOrder(@RequestBody  OrderDTO requestOrder)
+    public HashMap<String,Object> createOrder(@RequestBody OrderDTO requestOrder)
     {
         Order createdOrder = orderService.createOrder(requestOrder);
         HashMap<String,Object> response = new HashMap<String,Object>();

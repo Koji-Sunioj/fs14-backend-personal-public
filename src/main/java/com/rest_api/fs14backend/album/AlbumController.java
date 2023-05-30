@@ -1,14 +1,14 @@
 package com.rest_api.fs14backend.album;
 
-import com.rest_api.fs14backend.artist.Artist;
-import com.rest_api.fs14backend.artist.ArtistService;
+import com.rest_api.fs14backend.album.dto.AlbumDTO;
+import com.rest_api.fs14backend.album.dto.AlbumWDADTO;
+import com.rest_api.fs14backend.album.dto.AlbumWODTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("albums")
@@ -39,7 +39,7 @@ public class AlbumController {
     @GetMapping("{albumId}")
     public HashMap<String,Object> getAlbum(@PathVariable UUID albumId) {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        Album existingAlbum = albumService.getAlbum(albumId);
+        AlbumWDADTO existingAlbum = albumService.getAlbum(albumId);
         response.put("album",existingAlbum);
         return response;
     }

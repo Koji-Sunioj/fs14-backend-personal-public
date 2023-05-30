@@ -1,6 +1,6 @@
 package com.rest_api.fs14backend.artist;
-import com.rest_api.fs14backend.album.Album;
 import com.rest_api.fs14backend.album.AlbumService;
+import com.rest_api.fs14backend.artist.dto.ArtistDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,22 +22,17 @@ public class ArtistController {
     public HashMap<String,Object> getAllArtists()
     {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        List<Artist> artists = artistService.getArtists();
+        List<ArtistDTO> artists = artistService.getArtists();
         response.put("artists",artists);
-        System.out.println(artists.get(0).getName());
         return response;
     }
 
     @GetMapping("{artistId}")
-    public ArtistDTO getArtist(@PathVariable UUID artistId) {
-        Artist artist = artistService.findArtist(artistId);
-        List<Album> albums = albumService.findAlbumsByArtistId(artistId);
-        ArtistDTO withAlbums = new ArtistDTO(artist.getArtistId(),artist.getName(),albums);
-
-
-        System.out.println(albums.get(0).getTitle());
-        /*ArtistDTO artist = artistService.findArtistTest(artistId);*/
-        return withAlbums;
+    public HashMap<String,Object> getArtist(@PathVariable UUID artistId) {
+        HashMap<String,Object> response = new HashMap<String,Object>();
+        Artist artist =artistService.findArtist(artistId);
+        response.put("artist",artist);
+        return response;
     }
 
     @DeleteMapping("{artistId}")

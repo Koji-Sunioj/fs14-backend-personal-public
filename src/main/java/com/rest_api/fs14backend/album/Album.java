@@ -42,6 +42,7 @@ public class Album {
     @Column(name="price")
     private Double price;
 
+    @JsonIgnore
     @Column(name="description",length=800)
     private String description;
 
@@ -54,7 +55,7 @@ public class Album {
     @Column(name="tags",length=50)
     private String[] tags;
 
-    public String getArtistName() {
+    /*public String getArtistName() {
         return this.artist.getName();
-    }
+    }*/
 }

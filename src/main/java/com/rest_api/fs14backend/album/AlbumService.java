@@ -1,6 +1,8 @@
 package com.rest_api.fs14backend.album;
 
-import com.rest_api.fs14backend.artist.ArtistRepository;
+import com.rest_api.fs14backend.album.dto.AlbumDTO;
+import com.rest_api.fs14backend.album.dto.AlbumWDADTO;
+import com.rest_api.fs14backend.album.dto.AlbumWODTO;
 import com.rest_api.fs14backend.artist.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,9 @@ public class AlbumService {
     @Autowired
     ArtistService artistService;
 
-    public Album getAlbum(UUID albumId)
+    public AlbumWDADTO getAlbum(UUID albumId)
     {
-        return albumRepository.findById(albumId).orElse(null);
+        return albumRepository.findByAlbumId(albumId);
     }
 
     public List<AlbumWODTO> getAlbums(){
