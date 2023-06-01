@@ -1,5 +1,6 @@
 package com.rest_api.fs14backend.artist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rest_api.fs14backend.album.Album;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,14 +20,15 @@ public class Artist {
     @GeneratedValue
     @UuidGenerator
     @Column(name="artist_id")
+    @JsonIgnore
     private UUID artistId;
 
-    /*@JsonIgnore*/
-    //cannot add join here because it's already defined in other class
-    /*@JoinColumn(name="artist_id", nullable=false)*/
     @OneToMany(mappedBy="artist",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Album> albums;
 
     @Column(name="name",length=50,unique=true)
     private String name;
+
+    @JsonIgnore
+    private String[] genres;
 }

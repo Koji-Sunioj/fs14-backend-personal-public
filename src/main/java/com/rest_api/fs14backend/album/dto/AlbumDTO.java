@@ -7,3 +7,4 @@ import java.util.UUID;
 public record AlbumDTO(Integer released, String title, Double price,
                        String description, Integer stock, UUID artistId, List<Genre> genre) {
 }
+

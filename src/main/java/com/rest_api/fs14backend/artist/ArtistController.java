@@ -22,6 +22,7 @@ public class ArtistController {
     public HashMap<String,Object> getAllArtists()
     {
         HashMap<String,Object> response = new HashMap<String,Object>();
+        /*List<Artist> artists = artistService.getArtists();*/
         List<ArtistDTO> artists = artistService.getArtists();
         response.put("artists",artists);
         return response;

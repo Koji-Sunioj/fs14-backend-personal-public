@@ -12,10 +12,13 @@ public class ArtistService {
 
     @Autowired ArtistRepository artistRepository;
 
+    /*public List<Artist> getArtists(){
+        return artistRepository.findAll();
+    }
+*/
     public List<ArtistDTO> getArtists(){
         return artistRepository.findByPublishedNative();
     }
-
     public void removeArtist(UUID artistId) { artistRepository.deleteById(artistId);}
 
     public Artist findArtist(UUID artistId)
