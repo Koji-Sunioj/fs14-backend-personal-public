@@ -20,13 +20,22 @@ public class AlbumService {
     @Autowired
     ArtistService artistService;
 
-    public AlbumWDADTO getAlbum(UUID albumId)
+    public Album getAlbum(UUID albumId)
     {
-        return albumRepository.findByAlbumId(albumId);
+        return albumRepository.findById(albumId).orElse(null);
     }
 
-    public List<AlbumWODTO> getAlbums(){
+    /*public AlbumWDADTO getAlbum(UUID albumId)
+    {
+        return albumRepository.findByAlbumId(albumId);
+    }*/
+
+    /*public List<AlbumWODTO> getAlbums(){
         return albumRepository.findBy();
+    }*/
+
+    public List<Album> getAlbums(){
+        return albumRepository.findAll();
     }
 
     public void removeAlbum(UUID albumId)
@@ -47,8 +56,23 @@ public class AlbumService {
         createdAlbum.setPrice(newAlbum.price());
         createdAlbum.setDescription(newAlbum.description());
         createdAlbum.setStock(newAlbum.stock());
-        createdAlbum.setTags(newAlbum.tags());
         createdAlbum.setArtist(existingArtist);
+        createdAlbum.setGenre(newAlbum.genre());
         return albumRepository.save(createdAlbum);
     }
+
+    public Album updateAlbum(AlbumDTO patchAlbum,UUID albumId)
+    {
+        Artist existingArtist = artistService.findArtist(patchAlbum.artistId());
+        Album existingAlbum = albumRepository.findById(albumId).orElse(null);
+        existingAlbum.setTitle(patchAlbum.title());
+        existingAlbum.setReleased(patchAlbum.released());
+        existingAlbum.setPrice(patchAlbum.price());
+        existingAlbum.setDescription(patchAlbum.description());
+        existingAlbum.setStock(patchAlbum.stock());
+        existingAlbum.setArtist(existingArtist);
+        existingAlbum.setGenre(patchAlbum.genre());
+        return albumRepository.save(existingAlbum);
+    }
+
 }

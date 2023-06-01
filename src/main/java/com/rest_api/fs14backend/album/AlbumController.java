@@ -21,7 +21,8 @@ public class AlbumController {
     public HashMap<String,Object> getAlAlbums()
     {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        List<AlbumWODTO> albums = albumService.getAlbums();
+        /*List<AlbumWODTO> albums = albumService.getAlbums();*/
+        List<Album> albums = albumService.getAlbums();
         response.put("albums",albums);
         return response;
     }
@@ -39,9 +40,20 @@ public class AlbumController {
     @GetMapping("{albumId}")
     public HashMap<String,Object> getAlbum(@PathVariable UUID albumId) {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        AlbumWDADTO existingAlbum = albumService.getAlbum(albumId);
+        /*AlbumWDADTO existingAlbum = albumService.getAlbum(albumId);*/
+        Album existingAlbum = albumService.getAlbum(albumId);
         response.put("album",existingAlbum);
         return response;
+    }
+
+    @PatchMapping("{albumId}")
+    public  HashMap<String,Object> updateAlbum(@PathVariable UUID albumId,@RequestBody  AlbumDTO patchAlbum)
+    {
+        HashMap<String,Object> response = new HashMap<>();
+        Album updatedAlbum = albumService.updateAlbum(patchAlbum, albumId);
+        response.put("album",updatedAlbum);
+        response.put("message",String.format("successfully updated album %s",albumId));
+        return  response;
     }
 
     @DeleteMapping("{albumId}")

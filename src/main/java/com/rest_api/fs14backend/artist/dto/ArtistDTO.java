@@ -15,9 +15,7 @@ public class ArtistDTO {
 
     public ArtistDTO(UUID artistId, String name)
     {
-
         this.artistId = artistId;
         this.name = name;
-
     }
 }

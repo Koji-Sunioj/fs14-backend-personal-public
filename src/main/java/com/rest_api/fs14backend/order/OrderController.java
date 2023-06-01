@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("orders")
@@ -21,6 +22,15 @@ public class OrderController {
         HashMap<String,Object> response = new HashMap<String,Object>();
         List<Order> orders = orderService.getOrders();
         response.put("orders",orders);
+        return response;
+    }
+
+    @GetMapping("{orderId}")
+    public HashMap<String,Object> getOrder(@PathVariable UUID orderId)
+    {
+        HashMap<String,Object> response = new HashMap<String,Object>();
+        Order order = orderService.getOrder(orderId);
+        response.put("order",order);
         return response;
     }
 

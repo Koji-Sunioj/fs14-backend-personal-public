@@ -13,7 +13,7 @@ public class ArtistService {
     @Autowired ArtistRepository artistRepository;
 
     public List<ArtistDTO> getArtists(){
-        return artistRepository.findBy();
+        return artistRepository.findByPublishedNative();
     }
 
     public void removeArtist(UUID artistId) { artistRepository.deleteById(artistId);}

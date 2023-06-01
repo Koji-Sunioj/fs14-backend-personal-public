@@ -1,11 +1,17 @@
 package com.rest_api.fs14backend.album.dto;
 
 import com.rest_api.fs14backend.artist.Artist;
+import com.rest_api.fs14backend.genre.Genre;
+import jakarta.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import java.util.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AlbumWDADTO {
 
     private String title;
@@ -14,10 +20,13 @@ public class AlbumWDADTO {
     private Integer released;
     private Integer stock;
     private Double price;
-    private String[] tags;
     private UUID albumId;
+    @ManyToMany
+    private List<Genre> genre;
 
-    public AlbumWDADTO(UUID albumId, String description, Integer released, String title, Artist artist, Integer stock, Double price, String[] tags)
+    public AlbumWDADTO(UUID albumId, String description,
+                       Integer released, String title,
+                       Artist artist, Integer stock, Double price, List<Genre> genre)
     {
         this.albumId = albumId;
         this.title = title;
@@ -26,6 +35,6 @@ public class AlbumWDADTO {
         this.name = artist.getName();
         this.stock = stock;
         this.price = price;
-        this.tags = tags;
+        this.genre = genre; ;
     }
 }

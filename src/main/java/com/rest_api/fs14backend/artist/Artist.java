@@ -25,7 +25,7 @@ public class Artist {
     //cannot add join here because it's already defined in other class
     /*@JoinColumn(name="artist_id", nullable=false)*/
     @OneToMany(mappedBy="artist",cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Album> albums = new ArrayList<>();
+    private List<Album> albums;
 
     @Column(name="name",length=50,unique=true)
     private String name;

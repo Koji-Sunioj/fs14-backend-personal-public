@@ -36,5 +36,5 @@ public class Order {
     private Date purchasedAt;
 
     @OneToMany(mappedBy = "order")
-    private List<OrderQuantity> purchases = new ArrayList<>();
+    private List<OrderQuantity> purchases;
 }

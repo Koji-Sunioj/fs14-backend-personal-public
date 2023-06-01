@@ -12,10 +12,9 @@ public class AlbumWODTO {
     private Integer released;
     private Integer stock;
     private Double price;
-    private String[] tags;
     private UUID albumId;
 
-    public AlbumWODTO(UUID albumId, Integer released,String title, Artist artist,Integer stock,Double price,String[] tags)
+    public AlbumWODTO(UUID albumId, Integer released,String title, Artist artist,Integer stock,Double price)
     {
         this.albumId = albumId;
         this.title = title;
@@ -23,6 +22,5 @@ public class AlbumWODTO {
         this.name = artist.getName();
         this.stock = stock;
         this.price = price;
-        this.tags = tags;
     }
 }
