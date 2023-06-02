@@ -13,6 +13,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -35,6 +36,7 @@ public class Album {
 
     //@JsonIgnore
     /*@ManyToMany(mappedBy = "albums")*/
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "album_genre",
@@ -53,7 +55,7 @@ public class Album {
     @Column(name="price")
     private Double price;
 
-    /*@JsonIgnore*/
+   /* @JsonIgnore*/
     @Column(name="description",length=800)
     private String description;
 
@@ -65,5 +67,19 @@ public class Album {
 
     public String getArtistName() {
         return this.artist.getName();
+    }
+
+    @Transient
+    private ArrayList<String> genres = new ArrayList<String>();;
+
+    public ArrayList<String> getGenres()
+    {
+        ArrayList<String> tags = new ArrayList<String>();
+        for (Genre o: this.getGenre())
+        {
+            tags.add(o.getGenre());
+        }
+
+        return tags;
     }
 }

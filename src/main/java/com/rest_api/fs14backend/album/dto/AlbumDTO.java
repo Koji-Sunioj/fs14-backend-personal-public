@@ -5,6 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 public record AlbumDTO(Integer released, String title, Double price,
-                       String description, Integer stock, UUID artistId, List<Genre> genre) {
+                       String description, Integer stock, UUID artistId, List<UUID> genre) {
 }
 

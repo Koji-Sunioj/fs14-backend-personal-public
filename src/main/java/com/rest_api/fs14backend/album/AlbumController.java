@@ -21,7 +21,7 @@ public class AlbumController {
     public HashMap<String,Object> getAlAlbums()
     {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        /*List<AlbumWODTO> albums = albumService.getAlbums();*/
+        /*List<AlbumWODTO> albums = albumService.getAlbums2();*/
         List<Album> albums = albumService.getAlbums();
         response.put("albums",albums);
         return response;

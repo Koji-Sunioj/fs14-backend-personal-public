@@ -1,6 +1,7 @@
 package com.rest_api.fs14backend.artist;
 
-import com.rest_api.fs14backend.artist.dto.ArtistDTO;
+import com.rest_api.fs14backend.artist.dto.ArtistGetManyDTO;
+import com.rest_api.fs14backend.artist.dto.ArtistGetOneDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,16 @@ public class ArtistService {
         return artistRepository.findAll();
     }
 */
-    public List<ArtistDTO> getArtists(){
-        return artistRepository.findByPublishedNative();
+    public List<ArtistGetManyDTO> getArtists(){
+        return artistRepository.findAllWithCount();
     }
     public void removeArtist(UUID artistId) { artistRepository.deleteById(artistId);}
+
+
+    public ArtistGetOneDTO findOneArtist(UUID artistId)
+    {
+        return artistRepository.findByArtistId(artistId);
+    }
 
     public Artist findArtist(UUID artistId)
     {

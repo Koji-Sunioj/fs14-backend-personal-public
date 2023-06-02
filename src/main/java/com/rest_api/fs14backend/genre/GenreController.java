@@ -3,6 +3,7 @@ package com.rest_api.fs14backend.genre;
 import com.rest_api.fs14backend.album.Album;
 import com.rest_api.fs14backend.album.dto.AlbumDTO;
 import com.rest_api.fs14backend.album.dto.AlbumWDADTO;
+import com.rest_api.fs14backend.genre.dto.GenreGetManyDTO;
 import com.rest_api.fs14backend.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class GenreController {
     public HashMap<String,Object> getAllGenres()
     {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        List<Genre> genres = genreService.getGenres();
+        List<GenreGetManyDTO> genres = genreService.getGenres();
         response.put("genres",genres);
         return response;
     }

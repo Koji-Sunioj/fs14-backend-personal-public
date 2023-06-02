@@ -4,10 +4,13 @@ import com.rest_api.fs14backend.album.dto.AlbumDTO;
 import com.rest_api.fs14backend.album.dto.AlbumWDADTO;
 import com.rest_api.fs14backend.album.dto.AlbumWODTO;
 import com.rest_api.fs14backend.artist.ArtistService;
+import com.rest_api.fs14backend.genre.Genre;
+import com.rest_api.fs14backend.genre.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rest_api.fs14backend.artist.Artist;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +19,8 @@ public class AlbumService {
     @Autowired
     AlbumRepository albumRepository;
 
+    @Autowired
+    GenreService genreService;
 
     @Autowired
     ArtistService artistService;
@@ -30,9 +35,9 @@ public class AlbumService {
         return albumRepository.findByAlbumId(albumId);
     }*/
 
-    /*public List<AlbumWODTO> getAlbums(){
+    public List<AlbumWODTO> getAlbums2(){
         return albumRepository.findBy();
-    }*/
+    }
 
     public List<Album> getAlbums(){
         return albumRepository.findAll();
@@ -57,7 +62,13 @@ public class AlbumService {
         createdAlbum.setDescription(newAlbum.description());
         createdAlbum.setStock(newAlbum.stock());
         createdAlbum.setArtist(existingArtist);
-        createdAlbum.setGenre(newAlbum.genre());
+        ArrayList<Genre> genres = new ArrayList<Genre>();
+        for(UUID o: newAlbum.genre())
+        {
+            Genre foundGenre = genreService.getGenre(o);
+            genres.add(foundGenre);
+        }
+        createdAlbum.setGenre(genres);
         return albumRepository.save(createdAlbum);
     }
 
@@ -71,7 +82,7 @@ public class AlbumService {
         existingAlbum.setDescription(patchAlbum.description());
         existingAlbum.setStock(patchAlbum.stock());
         existingAlbum.setArtist(existingArtist);
-        existingAlbum.setGenre(patchAlbum.genre());
+        /*existingAlbum.setGenre(patchAlbum.genre());*/
         return albumRepository.save(existingAlbum);
     }
 

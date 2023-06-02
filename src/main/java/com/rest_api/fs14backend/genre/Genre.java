@@ -20,6 +20,7 @@ public class Genre {
     @Id
     @GeneratedValue
     @UuidGenerator
+   /* @JsonIgnore*/
     @Column(name="genre_id")
     private UUID genreId;
 
@@ -34,4 +35,12 @@ public class Genre {
     @JsonIgnore
     @ManyToMany(mappedBy = "genre")
     List<Album> albums;
+
+    @JsonIgnore
+    @Transient
+    private Integer genres;
+
+    @JsonIgnore
+    @Transient
+    private String[] artists;
 }

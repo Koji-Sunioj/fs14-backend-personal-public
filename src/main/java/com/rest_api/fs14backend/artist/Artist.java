@@ -1,6 +1,8 @@
 package com.rest_api.fs14backend.artist;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rest_api.fs14backend.album.Album;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,5 +32,6 @@ public class Artist {
     private String name;
 
     @JsonIgnore
+    @Transient
     private String[] genres;
 }

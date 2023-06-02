@@ -37,4 +37,15 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private List<OrderQuantity> purchases;
+
+    @Transient
+    private Double total;
+
+    public Double getTotal() {
+        Double sum = 0.0;
+        for (OrderQuantity o:purchases){
+            sum += o.getAlbum().getPrice() * o.getQuantity();
+        }
+        return sum;
+    }
 }
