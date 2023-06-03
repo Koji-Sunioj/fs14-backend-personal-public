@@ -32,8 +32,8 @@ public class ArtistController {
     @GetMapping("{artistId}")
     public HashMap<String,Object> getArtist(@PathVariable UUID artistId) {
         HashMap<String,Object> response = new HashMap<String,Object>();
-       /* ArtistGetOneDTO artist = artistService.findOneArtist(artistId);*/
-        Artist artist =artistService.findArtist(artistId);
+        ArtistGetOneDTO artist = artistService.findOneArtist(artistId);
+        /*Artist artist =artistService.findArtist(artistId);*/
         response.put("artist",artist);
         return response;
     }

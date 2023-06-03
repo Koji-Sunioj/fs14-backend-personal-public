@@ -69,6 +69,10 @@ public class Album {
         return this.artist.getName();
     }
 
+    public UUID getArtistId() {
+        return this.artist.getArtistId();
+    }
+
     @Transient
     private ArrayList<String> genres = new ArrayList<String>();;
 

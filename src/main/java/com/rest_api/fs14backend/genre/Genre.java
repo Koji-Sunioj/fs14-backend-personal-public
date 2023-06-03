@@ -20,7 +20,7 @@ public class Genre {
     @Id
     @GeneratedValue
     @UuidGenerator
-   /* @JsonIgnore*/
+    @JsonIgnore
     @Column(name="genre_id")
     private UUID genreId;
 
@@ -32,7 +32,7 @@ public class Genre {
             name = "album_genre",
             joinColumns = @JoinColumn(name = "genre_genre_id"),
             inverseJoinColumns = @JoinColumn(name = "album_album_id"))*/
-    @JsonIgnore
+
     @ManyToMany(mappedBy = "genre")
     List<Album> albums;
 
