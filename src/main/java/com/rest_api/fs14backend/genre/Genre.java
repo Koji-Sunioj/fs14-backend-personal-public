@@ -27,12 +27,6 @@ public class Genre {
     @Column(name="genre",length=100)
     private String genre;
 
-    /*@ManyToMany*/
-    /*@JoinTable(
-            name = "album_genre",
-            joinColumns = @JoinColumn(name = "genre_genre_id"),
-            inverseJoinColumns = @JoinColumn(name = "album_album_id"))*/
-
     @ManyToMany(mappedBy = "genre")
     List<Album> albums;
 

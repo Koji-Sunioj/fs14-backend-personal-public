@@ -1,6 +1,7 @@
 package com.rest_api.fs14backend.album;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rest_api.fs14backend.album.dto.AlbumGenre;
 import com.rest_api.fs14backend.artist.Artist;
 import com.rest_api.fs14backend.genre.Genre;
 import com.rest_api.fs14backend.order_bridge.OrderQuantity;
@@ -31,11 +32,6 @@ public class Album {
     @Column(name="album_id")
     private UUID albumId;
 
-    /*@OneToMany(mappedBy = "album")
-    Set<OrderQuantity> albums;*/
-
-    //@JsonIgnore
-    /*@ManyToMany(mappedBy = "albums")*/
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -55,7 +51,6 @@ public class Album {
     @Column(name="price")
     private Double price;
 
-   /* @JsonIgnore*/
     @Column(name="description",length=800)
     private String description;
 
@@ -74,6 +69,23 @@ public class Album {
     }
 
     @Transient
+    private ArrayList<AlbumGenre> genres = new ArrayList<AlbumGenre>();;
+
+    public ArrayList<AlbumGenre> getGenres()
+    {
+        ArrayList<AlbumGenre> tags = new ArrayList<AlbumGenre>();
+        for (Genre o: this.getGenre())
+        {
+            AlbumGenre albumGenre = new AlbumGenre();
+            albumGenre.setGenreId(o.getGenreId());
+            albumGenre.setGenreName(o.getGenre());
+            tags.add(albumGenre);
+        }
+
+        return tags;
+    }
+
+    /*@Transient
     private ArrayList<String> genres = new ArrayList<String>();;
 
     public ArrayList<String> getGenres()
@@ -85,5 +97,5 @@ public class Album {
         }
 
         return tags;
-    }
+    }*/
 }

@@ -1,8 +1,6 @@
 package com.rest_api.fs14backend.album;
 
 import com.rest_api.fs14backend.album.dto.AlbumDTO;
-import com.rest_api.fs14backend.album.dto.AlbumWDADTO;
-import com.rest_api.fs14backend.album.dto.AlbumWODTO;
 import com.rest_api.fs14backend.artist.ArtistService;
 import com.rest_api.fs14backend.genre.Genre;
 import com.rest_api.fs14backend.genre.GenreService;
@@ -30,15 +28,6 @@ public class AlbumService {
         return albumRepository.findById(albumId).orElse(null);
     }
 
-    /*public AlbumWDADTO getAlbum(UUID albumId)
-    {
-        return albumRepository.findByAlbumId(albumId);
-    }*/
-
-    public List<AlbumWODTO> getAlbums2(){
-        return albumRepository.findBy();
-    }
-
     public List<Album> getAlbums(){
         return albumRepository.findAll();
     }
@@ -47,11 +36,6 @@ public class AlbumService {
     {
         albumRepository.deleteById(albumId);
     }
-
-    public List<Album> findAlbumsByArtistId(UUID artistId) {
-        return albumRepository.findByArtistArtistId(artistId);
-    }
-
     public Album createAlbum(AlbumDTO newAlbum)
     {
         Artist existingArtist = artistService.findArtist(newAlbum.artistId());
@@ -82,7 +66,6 @@ public class AlbumService {
         existingAlbum.setDescription(patchAlbum.description());
         existingAlbum.setStock(patchAlbum.stock());
         existingAlbum.setArtist(existingArtist);
-        /*existingAlbum.setGenre(patchAlbum.genre());*/
         return albumRepository.save(existingAlbum);
     }
 

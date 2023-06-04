@@ -25,7 +25,6 @@ public class OrderService {
 
     @Autowired
     UserService userService;
-
     public List<Order> getOrders()
     {
         return orderRepository.findAll();

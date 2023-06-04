@@ -1,7 +1,6 @@
 package com.rest_api.fs14backend.artist;
 
 import com.rest_api.fs14backend.artist.dto.ArtistGetManyDTO;
-import com.rest_api.fs14backend.artist.dto.ArtistGetOneDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,12 +11,9 @@ import java.util.UUID;
 @Repository
 public interface ArtistRepository  extends JpaRepository<Artist, UUID> {
 
-   /* List<ArtistDTO> findBy();*/
-    
-    ArtistGetOneDTO findByArtistId(UUID artistId);
-
     @Query(value="select artist.name,artist.artist_id as artistId," +
             "count(distinct(album.album_id)) as albums, " +
+            /*"array_agg(json_build_object('genre_id',genre.genre_id,'genre_name',genre.genre)) as genres " +*/
             "array_remove(array_agg(genre),NULL) as genres " +
             "from artist " +
             "left join album on album.artist_id = artist.artist_id " +

@@ -41,6 +41,14 @@ public class Order {
     @Transient
     private Double total;
 
+    @Transient
+    private UUID userId;
+
+    public UUID getUserId()
+    {
+        return this.user.getUserId();
+    }
+
     public Double getTotal() {
         Double sum = 0.0;
         for (OrderQuantity o:purchases){
