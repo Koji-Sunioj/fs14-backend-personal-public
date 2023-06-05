@@ -10,5 +10,6 @@ public interface GenreGetManyDTO {
 
     Integer getAlbums();
 
+
     String[] getArtists();
 }
