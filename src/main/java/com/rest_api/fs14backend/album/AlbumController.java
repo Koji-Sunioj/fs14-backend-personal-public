@@ -38,9 +38,7 @@ public class AlbumController {
     @GetMapping("{albumId}")
     public HashMap<String,Object> getAlbum(@PathVariable UUID albumId) {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        AlbumGetOneDTO existingAlbum = albumService.getAlbum2(albumId);
-        /*System.out.println(existingAlbum.albumId());*/
-       /* Album existingAlbum = albumService.getAlbum(albumId);*/
+        AlbumGetOneDTO existingAlbum = albumService.getAlbum(albumId);
         response.put("album",existingAlbum);
         return response;
     }

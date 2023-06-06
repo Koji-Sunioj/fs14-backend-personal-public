@@ -42,7 +42,6 @@ public class Album {
 
     @ManyToOne
     @JoinColumn(name="artist_id", nullable=false)
-    /*@JsonIgnore*/
     private Artist artist;
 
     @Column(name="title",length=100)
@@ -61,14 +60,6 @@ public class Album {
     @Column(name="released")
     private Integer released;
 
-    /*public String getArtistName() {
-        return this.artist.getName();
-    }
-
-    public UUID getArtistId() {
-        return this.artist.getArtistId();
-    }*/
-
     @Transient
     private ArrayList<AlbumGenre> genres = new ArrayList<AlbumGenre>();;
 
@@ -85,18 +76,4 @@ public class Album {
 
         return tags;
     }
-
-    /*@Transient
-    private ArrayList<String> genres = new ArrayList<String>();;
-
-    public ArrayList<String> getGenres()
-    {
-        ArrayList<String> tags = new ArrayList<String>();
-        for (Genre o: this.getGenre())
-        {
-            tags.add(o.getGenre());
-        }
-
-        return tags;
-    }*/
 }

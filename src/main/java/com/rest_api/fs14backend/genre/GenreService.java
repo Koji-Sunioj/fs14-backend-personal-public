@@ -17,10 +17,6 @@ public class GenreService {
         return genreRepository.findById(genreId).orElse(null);
     }
 
-    /*public List<Genre> getGenres(){
-        return genreRepository.findAll();
-    }*/
-
     public List<GenreGetManyDTO> getGenres(){
         return genreRepository.findAllWithCount();
     }

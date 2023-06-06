@@ -17,24 +17,14 @@ import java.util.UUID;
 public class AlbumService {
     @Autowired
     AlbumRepository albumRepository;
-
     @Autowired
     GenreService genreService;
-
     @Autowired
     ArtistService artistService;
-
-    public Album getAlbum(UUID albumId)
-    {
-        return albumRepository.findById(albumId).orElse(null);
-    }
-
-    public AlbumGetOneDTO getAlbum2(UUID albumId) { return albumRepository.findOneAlbum(albumId);};
-
+    public AlbumGetOneDTO getAlbum(UUID albumId) { return albumRepository.findOneAlbum(albumId);};
     public List<Album> getAlbums(){
         return albumRepository.findAll();
     }
-
     public void removeAlbum(UUID albumId)
     {
         albumRepository.deleteById(albumId);
@@ -58,7 +48,6 @@ public class AlbumService {
         createdAlbum.setGenre(genres);
         return albumRepository.save(createdAlbum);
     }
-
     public Album updateAlbum(AlbumDTO patchAlbum,UUID albumId)
     {
         Artist existingArtist = artistService.findArtist(patchAlbum.artistId());

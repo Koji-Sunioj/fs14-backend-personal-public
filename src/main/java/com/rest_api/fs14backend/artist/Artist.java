@@ -22,7 +22,6 @@ public class Artist {
     @GeneratedValue
     @UuidGenerator
     @Column(name="artist_id")
-    /*@JsonIgnore*/
     private UUID artistId;
 
     @JsonIgnore

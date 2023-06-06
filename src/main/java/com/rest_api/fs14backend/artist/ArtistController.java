@@ -1,6 +1,7 @@
 package com.rest_api.fs14backend.artist;
 import com.rest_api.fs14backend.album.AlbumService;
 import com.rest_api.fs14backend.artist.dto.ArtistGetManyDTO;
+import com.rest_api.fs14backend.artist.dto.ArtistGetOneDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class ArtistController {
     @GetMapping("{artistId}")
     public HashMap<String,Object> getArtist(@PathVariable UUID artistId) {
         HashMap<String,Object> response = new HashMap<String,Object>();
-        Artist artist =artistService.findArtist(artistId);
+        ArtistGetOneDTO artist = artistService.findOneArtist(artistId);
         response.put("artist",artist);
         return response;
     }
