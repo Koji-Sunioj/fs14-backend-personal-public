@@ -1,6 +1,7 @@
 package com.rest_api.fs14backend.album;
 
 import com.rest_api.fs14backend.album.dto.AlbumDTO;
+import com.rest_api.fs14backend.album.dto.AlbumGetOneDTO;
 import com.rest_api.fs14backend.artist.ArtistService;
 import com.rest_api.fs14backend.genre.Genre;
 import com.rest_api.fs14backend.genre.GenreService;
@@ -27,6 +28,8 @@ public class AlbumService {
     {
         return albumRepository.findById(albumId).orElse(null);
     }
+
+    public AlbumGetOneDTO getAlbum2(UUID albumId) { return albumRepository.findOneAlbum(albumId);};
 
     public List<Album> getAlbums(){
         return albumRepository.findAll();

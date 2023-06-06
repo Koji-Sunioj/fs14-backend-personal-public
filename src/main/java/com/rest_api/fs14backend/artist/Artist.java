@@ -22,9 +22,10 @@ public class Artist {
     @GeneratedValue
     @UuidGenerator
     @Column(name="artist_id")
-    @JsonIgnore
+    /*@JsonIgnore*/
     private UUID artistId;
 
+    @JsonIgnore
     @OneToMany(mappedBy="artist",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Album> albums;
 
