@@ -30,17 +30,18 @@ public class AlbumService {
         albumRepository.deleteById(albumId);
     }
     public Album createAlbum(AlbumDTO newAlbum)
+
     {
-        Artist existingArtist = artistService.findArtist(newAlbum.artistId());
+        Artist existingArtist = artistService.findArtist(newAlbum.getArtistId());
         Album createdAlbum = new Album();
-        createdAlbum.setTitle(newAlbum.title());
-        createdAlbum.setReleased(newAlbum.released());
-        createdAlbum.setPrice(newAlbum.price());
-        createdAlbum.setDescription(newAlbum.description());
-        createdAlbum.setStock(newAlbum.stock());
+        createdAlbum.setTitle(newAlbum.getTitle());
+        createdAlbum.setReleased(newAlbum.getReleased());
+        createdAlbum.setPrice(newAlbum.getPrice());
+        createdAlbum.setDescription(newAlbum.getDescription());
+        createdAlbum.setStock(newAlbum.getStock());
         createdAlbum.setArtist(existingArtist);
         ArrayList<Genre> genres = new ArrayList<Genre>();
-        for(UUID o: newAlbum.genre())
+        for(UUID o: newAlbum.getGenre())
         {
             Genre foundGenre = genreService.getGenre(o);
             genres.add(foundGenre);
@@ -50,14 +51,22 @@ public class AlbumService {
     }
     public Album updateAlbum(AlbumDTO patchAlbum,UUID albumId)
     {
-        Artist existingArtist = artistService.findArtist(patchAlbum.artistId());
+
+        Artist existingArtist = artistService.findArtist(patchAlbum.getArtistId());
         Album existingAlbum = albumRepository.findById(albumId).orElse(null);
-        existingAlbum.setTitle(patchAlbum.title());
-        existingAlbum.setReleased(patchAlbum.released());
-        existingAlbum.setPrice(patchAlbum.price());
-        existingAlbum.setDescription(patchAlbum.description());
-        existingAlbum.setStock(patchAlbum.stock());
+        existingAlbum.setTitle(patchAlbum.getTitle());
+        existingAlbum.setReleased(patchAlbum.getReleased());
+        existingAlbum.setPrice(patchAlbum.getPrice());
+        existingAlbum.setDescription(patchAlbum.getDescription());
+        existingAlbum.setStock(patchAlbum.getStock());
         existingAlbum.setArtist(existingArtist);
+        ArrayList<Genre> genres = new ArrayList<Genre>();
+        for(UUID o: patchAlbum.getGenre())
+        {
+            Genre foundGenre = genreService.getGenre(o);
+            genres.add(foundGenre);
+        }
+        existingAlbum.setGenre(genres);
         return albumRepository.save(existingAlbum);
     }
 

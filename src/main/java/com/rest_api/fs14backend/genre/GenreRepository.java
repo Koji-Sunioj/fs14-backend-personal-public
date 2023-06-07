@@ -14,12 +14,12 @@ public interface GenreRepository extends JpaRepository<Genre, UUID> {
 
     @Query(value="select genre.genre_id as genreId, genre.genre, "+
             "count(album_album_id) as albums, " +
-            "array_agg(artist.name) as artists " +
+            "array_agg(distinct artist.name) as artists " +
             "from genre " +
             "left join album_genre on genre.genre_id = album_genre.genre_genre_id " +
             "left join album on album.album_id = album_genre.album_album_id " +
             "left join artist on artist.artist_id = album.artist_id " +
-            "group by genreId,genre.genre",
+            "group by genreId,genre.genre order by albums desc",
             nativeQuery = true)
     List<GenreGetManyDTO> findAllWithCount();
 }

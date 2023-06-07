@@ -37,7 +37,26 @@ public class OrderService {
 
     public Order createOrder(OrderDTO newOrder)
     {
-        User existingUser = userService.getUser(newOrder.userId());
+
+        User existingUser = userService.getUser(newOrder.getUserId());
+        Order createdOrder = new Order();
+        createdOrder.setUser(existingUser);
+        Order dbOrder = orderRepository.save(createdOrder);
+        newOrder.getAlbums().forEach((temp) -> {
+            OrderQuantity orderQuantity = new OrderQuantity();
+            OrderQuantityKey orderKey = new OrderQuantityKey();
+            orderQuantity.setOrder(dbOrder);
+            orderQuantity.setAlbum(albumRepository.findById(temp.getAlbumId()).orElse(null));
+            orderQuantity.setQuantity(temp.getQuantity());
+            UUID orderId = orderQuantity.getOrder().getOrderId();
+            UUID albumId = orderQuantity.getAlbum().getAlbumId();
+            orderKey.setOrderId(orderId);
+            orderKey.setAlbumID(albumId);
+            orderQuantity.setOrderKey(orderKey);
+            orderQuantityRepository.save(orderQuantity);
+        });
+        Order something = orderRepository.findById(dbOrder.getOrderId()).orElse(null);
+        /*User existingUser = userService.getUser(newOrder.userId());
         Order createdOrder = new Order();
         createdOrder.setUser(existingUser);
         Order dbOrder = orderRepository.save(createdOrder);
@@ -54,6 +73,8 @@ public class OrderService {
             orderQuantity.setOrderKey(orderKey);
             orderQuantityRepository.save(orderQuantity);
         });
-        return dbOrder;
+        return dbOrder
+        */
+        return something;
     }
 }

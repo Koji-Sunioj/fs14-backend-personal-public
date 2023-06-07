@@ -29,7 +29,6 @@ public class OrderQuantity {
     @ManyToOne
     @MapsId("album_id")
     @JoinColumn(name = "album_id")
-    /*@JsonIgnore*/
     Album album;
 
     private Integer quantity;

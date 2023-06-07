@@ -18,8 +18,7 @@ public interface ArtistRepository  extends JpaRepository<Artist, UUID> {
             "coalesce(json_agg(json_build_object('title',records.title,'albumId',records.album_id," +
             "'price',records.price,'stock',records.stock,'released',records.released,'genres',records.genres)) " +
             "filter (where records.album_id is not null),'[]') as albums " +
-            "from " +
-            "(select " +
+            "from (select " +
             "artist.name, album.album_id,album.title,album.price,album.stock,album.released, " +
             "json_agg(json_build_object('genreId',genre.genre_id,'genre',genre.genre)) as genres " +
             "from artist " +
@@ -33,13 +32,13 @@ public interface ArtistRepository  extends JpaRepository<Artist, UUID> {
 
     @Query(value="select artist.name,artist.artist_id as artistId," +
             "count(distinct(album.album_id)) as albums, " +
-            "coalesce(json_agg(json_build_object('genreId',genre.genre_id,'genreName',genre.genre)) " +
+            "coalesce(json_agg(distinct jsonb_build_object('genreId',genre.genre_id,'genreName',genre.genre)) " +
             "filter (where genre.genre_id is not null),'[]') as genres " +
             "from artist " +
             "left join album on album.artist_id = artist.artist_id " +
             "left join album_genre on album.album_id = album_genre.album_album_id " +
             "left join genre on genre.genre_id = album_genre.genre_genre_id " +
-            "group by artist.name,artistId",
+            "group by artist.name,artistId order by albums desc",
             nativeQuery = true)
     List<ArtistGetManyDTO> findAllWithCount();
 
