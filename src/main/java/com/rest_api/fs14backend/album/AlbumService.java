@@ -6,6 +6,10 @@ import com.rest_api.fs14backend.artist.ArtistService;
 import com.rest_api.fs14backend.genre.Genre;
 import com.rest_api.fs14backend.genre.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.rest_api.fs14backend.artist.Artist;
 
@@ -22,8 +26,14 @@ public class AlbumService {
     @Autowired
     ArtistService artistService;
     public AlbumGetOneDTO getAlbum(UUID albumId) { return albumRepository.findOneAlbum(albumId);};
-    public List<Album> getAlbums(){
-        return albumRepository.findAll();
+    public Page<Album> getAlbums(String sortBy,String byDirection,Integer pageRequest)
+    {
+        Integer start = pageRequest -1;
+        Sort.Direction sortParam = byDirection.contains("descending")
+                ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable filterParams = PageRequest.of(start,5, Sort.by(sortParam,sortBy));
+        Page<Album> albums =  albumRepository.findAll(filterParams);
+        return albums;
     }
     public void removeAlbum(UUID albumId)
     {
