@@ -5,8 +5,10 @@ import com.rest_api.fs14backend.order.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -39,8 +41,15 @@ public class OrderController {
     {
         Order createdOrder = orderService.createOrder(requestOrder);
         HashMap<String,Object> response = new HashMap<String,Object>();
-        response.put("message",String.format("successfull created order %s",createdOrder.getOrderId()));
-        response.put("order",createdOrder);
+        if (createdOrder != null)
+        {
+            response.put("message",String.format("successfull created order %s",createdOrder.getOrderId()));
+            response.put("order",createdOrder);
+        }
+        else
+        {
+            response.put("message","cannot create order!");
+        }
         return response;
     }
 }

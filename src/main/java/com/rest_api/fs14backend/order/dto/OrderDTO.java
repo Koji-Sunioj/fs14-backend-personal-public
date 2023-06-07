@@ -5,11 +5,6 @@ import lombok.Data;
 import java.util.List;
 import java.util.UUID;
 
-/*public interface OrderDTO {
-    UUID userId();
-    List<OrderQuantityDTO> albums();
-
-}*/
 
 @Data
 public class OrderDTO

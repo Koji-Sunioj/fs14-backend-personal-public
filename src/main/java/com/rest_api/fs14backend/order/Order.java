@@ -35,7 +35,7 @@ public class Order {
     @Column(insertable=false,name="purchased_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date purchasedAt;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE)
     private List<OrderQuantity> purchases;
 
     @Transient
